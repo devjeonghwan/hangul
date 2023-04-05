@@ -70,7 +70,7 @@ const size_t DOUBLE_SAME_CONSONANT_HANGUL_LETTERS_LENGTH = sizeof(DOUBLE_SAME_CO
 #pragma endregion
 
 #pragma region Get Functions
-inline int _GetHangulLetterIndex(const wchar_t* letters, const size_t length, const wchar_t letter)
+extern inline int _GetHangulLetterIndex(const wchar_t* letters, const size_t length, const wchar_t letter)
 {
     for (int index = 0; index < length; index++)
     {
@@ -83,39 +83,39 @@ inline int _GetHangulLetterIndex(const wchar_t* letters, const size_t length, co
     return -1;
 }
 
-inline int _GetFirstHangulLetterIndex(const wchar_t letter)
+extern inline int _GetFirstHangulLetterIndex(const wchar_t letter)
 {
     return _GetHangulLetterIndex(FIRST_HANGUL_LETTERS, FIRST_HANGUL_LETTERS_LENGTH, letter);
 }
 
-inline int _GetMiddleHangulLetterIndex(const wchar_t letter)
+extern inline int _GetMiddleHangulLetterIndex(const wchar_t letter)
 {
     return _GetHangulLetterIndex(MIDDLE_HANGUL_LETTERS, MIDDLE_HANGUL_LETTERS_LENGTH, letter);
 }
 
-inline int _GetLastHangulLetterIndex(const wchar_t letter)
+extern inline int _GetLastHangulLetterIndex(const wchar_t letter)
 {
     return _GetHangulLetterIndex(LAST_HANGUL_LETTERS, LAST_HANGUL_LETTERS_LENGTH, letter);
 }
 
-inline bool _ContainsFirstHangulLetterIndex(const int index)
+extern inline bool _ContainsFirstHangulLetterIndex(const int index)
 {
     return index >= 0 && index < FIRST_HANGUL_LETTERS_LENGTH;
 }
 
-inline bool _ContainsMiddleHangulLetterIndex(const int index)
+extern inline bool _ContainsMiddleHangulLetterIndex(const int index)
 {
     return index >= 0 && index < MIDDLE_HANGUL_LETTERS_LENGTH;
 }
 
-inline bool _ContainsLastHangulLetterIndex(const int index)
+extern inline bool _ContainsLastHangulLetterIndex(const int index)
 {
     return index >= 1 && index < LAST_HANGUL_LETTERS_LENGTH;
 }
 #pragma endregion
 
 #pragma region Compose Functions
-inline wchar_t _ComposeDoubleHangulLetter(const wchar_t* letters, const size_t length, const wchar_t letter1, const wchar_t letter2)
+extern inline wchar_t _ComposeDoubleHangulLetter(const wchar_t* letters, const size_t length, const wchar_t letter1, const wchar_t letter2)
 {
     for (int index = 0; index < length; index++)
     {
@@ -130,27 +130,27 @@ inline wchar_t _ComposeDoubleHangulLetter(const wchar_t* letters, const size_t l
     return L'\0';
 }
 
-inline wchar_t _ComposeDoubleVowelHangulLetter(const wchar_t letter1, const wchar_t letter2)
+extern inline wchar_t _ComposeDoubleVowelHangulLetter(const wchar_t letter1, const wchar_t letter2)
 {
     return _ComposeDoubleHangulLetter((const wchar_t*)DOUBLE_VOWEL_HANGUL_LETTERS, DOUBLE_VOWEL_HANGUL_LETTERS_LENGTH, letter1, letter2);
 }
 
-inline wchar_t _ComposeDoubleLigatureVowelHangulLetter(const wchar_t letter1, const wchar_t letter2)
+extern inline wchar_t _ComposeDoubleLigatureVowelHangulLetter(const wchar_t letter1, const wchar_t letter2)
 {
     return _ComposeDoubleHangulLetter((const wchar_t*)DOUBLE_LIGATURE_VOWEL_HANGUL_LETTERS, DOUBLE_LIGATURE_VOWEL_HANGUL_LETTERS_LENGTH, letter1, letter2);
 }
 
-inline wchar_t _ComposeDoubleConsonantHangulLetter(const wchar_t letter1, const wchar_t letter2)
+extern inline wchar_t _ComposeDoubleConsonantHangulLetter(const wchar_t letter1, const wchar_t letter2)
 {
     return _ComposeDoubleHangulLetter((const wchar_t*)DOUBLE_CONSONANT_HANGUL_LETTERS, DOUBLE_CONSONANT_HANGUL_LETTERS_LENGTH, letter1, letter2);
 }
 
-inline wchar_t _ComposeDoubleSameConsonantHangulLetter(const wchar_t letter1, const wchar_t letter2)
+extern inline wchar_t _ComposeDoubleSameConsonantHangulLetter(const wchar_t letter1, const wchar_t letter2)
 {
     return _ComposeDoubleHangulLetter((const wchar_t*)DOUBLE_SAME_CONSONANT_HANGUL_LETTERS, DOUBLE_SAME_CONSONANT_HANGUL_LETTERS_LENGTH, letter1, letter2);
 }
 
-inline wchar_t _ComposeHangulCharacter(const int firstLetterIndex, const int middleLetterIndex, const int lastLetterIndex)
+extern inline wchar_t _ComposeHangulCharacter(const int firstLetterIndex, const int middleLetterIndex, const int lastLetterIndex)
 {
     bool firstLetterExists = _ContainsFirstHangulLetterIndex(firstLetterIndex);
     bool middleLetterExists = _ContainsMiddleHangulLetterIndex(middleLetterIndex);
@@ -183,7 +183,7 @@ inline wchar_t _ComposeHangulCharacter(const int firstLetterIndex, const int mid
 #pragma endregion
 
 #pragma region Decompose Functions
-inline bool _DecomposeDoubleHangulLetter(const wchar_t* letters, const size_t length, const wchar_t letter, wchar_t* letter1, wchar_t* letter2)
+extern inline bool _DecomposeDoubleHangulLetter(const wchar_t* letters, const size_t length, const wchar_t letter, wchar_t* letter1, wchar_t* letter2)
 {
     for (int index = 0; index < length; index++)
     {
@@ -201,29 +201,29 @@ inline bool _DecomposeDoubleHangulLetter(const wchar_t* letters, const size_t le
     return false;
 }
 
-inline bool _DecomposeDoubleVowelHangulLetter(const wchar_t letter, wchar_t* letter1, wchar_t* letter2)
+extern inline bool _DecomposeDoubleVowelHangulLetter(const wchar_t letter, wchar_t* letter1, wchar_t* letter2)
 {
     return _DecomposeDoubleHangulLetter((const wchar_t*)DOUBLE_VOWEL_HANGUL_LETTERS, DOUBLE_VOWEL_HANGUL_LETTERS_LENGTH, letter, letter1, letter2);
 }
 
-inline bool _DecomposeDoubleLigatureVowelHangulLetter(const wchar_t letter, wchar_t* letter1, wchar_t* letter2)
+extern inline bool _DecomposeDoubleLigatureVowelHangulLetter(const wchar_t letter, wchar_t* letter1, wchar_t* letter2)
 {
     return _DecomposeDoubleHangulLetter((const wchar_t*)DOUBLE_LIGATURE_VOWEL_HANGUL_LETTERS, DOUBLE_LIGATURE_VOWEL_HANGUL_LETTERS_LENGTH, letter, letter1, letter2);
 }
 
-inline bool _DecomposeDoubleConsonantHangulLetter(const wchar_t letter, wchar_t* letter1, wchar_t* letter2)
+extern inline bool _DecomposeDoubleConsonantHangulLetter(const wchar_t letter, wchar_t* letter1, wchar_t* letter2)
 {
     return _DecomposeDoubleHangulLetter((const wchar_t*)DOUBLE_CONSONANT_HANGUL_LETTERS, DOUBLE_CONSONANT_HANGUL_LETTERS_LENGTH, letter, letter1, letter2);
 }
 
-inline bool _DecomposeDoubleSameConsonantHangulLetter(const wchar_t letter, wchar_t* letter1, wchar_t* letter2)
+extern inline bool _DecomposeDoubleSameConsonantHangulLetter(const wchar_t letter, wchar_t* letter1, wchar_t* letter2)
 {
     return _DecomposeDoubleHangulLetter((const wchar_t*)DOUBLE_SAME_CONSONANT_HANGUL_LETTERS, DOUBLE_SAME_CONSONANT_HANGUL_LETTERS_LENGTH, letter, letter1, letter2);
 }
 #pragma endregion
 
 #pragma region Update Functions
-inline void _UpdateHangulContext(HANGUL_CONTEXT* context, const wchar_t character, const bool combining, const HANGUL_COMPOSITION_STATE state)
+extern inline void _UpdateHangulContext(HANGUL_CONTEXT* context, const wchar_t character, const bool combining, const HANGUL_COMPOSITION_STATE state)
 {
     context->buffer = character;
     context->combining = combining;
